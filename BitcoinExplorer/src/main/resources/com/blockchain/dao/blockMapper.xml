@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockchain.dao.blockMapper">
+  <resultMap id="BaseResultMap" type="com.blockchain.po.block">
+    <id column="block_hash" jdbcType="CHAR" property="blockHash" />
+    <result column="blockchain_id" jdbcType="INTEGER" property="blockchainId" />
+    <result column="block_height" jdbcType="INTEGER" property="blockHeight" />
+    <result column="block_time" jdbcType="TIMESTAMP" property="blockTime" />
+    <result column="tx_size" jdbcType="INTEGER" property="txSize" />
+    <result column="size_on_disk" jdbcType="BIGINT" property="sizeOnDisk" />
+    <result column="difficulty" jdbcType="DOUBLE" property="difficulty" />
+    <result column="prevBlockhash" jdbcType="CHAR" property="prevblockhash" />
+    <result column="nextBlockhash" jdbcType="CHAR" property="nextblockhash" />
+    <result column="output_total" jdbcType="DOUBLE" property="outputTotal" />
+    <result column="transaction_fees" jdbcType="DOUBLE" property="transactionFees" />
+    <result column="merkle_root" jdbcType="CHAR" property="merkleRoot" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    block_hash, blockchain_id, block_height, block_time, tx_size, size_on_disk, difficulty, 
+    prevBlockhash, nextBlockhash, output_total, transaction_fees, merkle_root
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from block
+    where block_hash = #{blockHash,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from block
+    where block_hash = #{blockHash,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.blockchain.po.block">
+    insert into block (block_hash, blockchain_id, block_height, 
+      block_time, tx_size, size_on_disk, 
+      difficulty, prevBlockhash, nextBlockhash, 
+      output_total, transaction_fees, merkle_root
+      )
+    values (#{blockHash,jdbcType=CHAR}, #{blockchainId,jdbcType=INTEGER}, #{blockHeight,jdbcType=INTEGER}, 
+      #{blockTime,jdbcType=TIMESTAMP}, #{txSize,jdbcType=INTEGER}, #{sizeOnDisk,jdbcType=BIGINT}, 
+      #{difficulty,jdbcType=DOUBLE}, #{prevblockhash,jdbcType=CHAR}, #{nextblockhash,jdbcType=CHAR}, 
+      #{outputTotal,jdbcType=DOUBLE}, #{transactionFees,jdbcType=DOUBLE}, #{merkleRoot,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.blockchain.po.block">
+    insert into block
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="blockHash != null">
+        block_hash,
+      </if>
+      <if test="blockchainId != null">
+        blockchain_id,
+      </if>
+      <if test="blockHeight != null">
+        block_height,
+      </if>
+      <if test="blockTime != null">
+        block_time,
+      </if>
+      <if test="txSize != null">
+        tx_size,
+      </if>
+      <if test="sizeOnDisk != null">
+        size_on_disk,
+      </if>
+      <if test="difficulty != null">
+        difficulty,
+      </if>
+      <if test="prevblockhash != null">
+        prevBlockhash,
+      </if>
+      <if test="nextblockhash != null">
+        nextBlockhash,
+      </if>
+      <if test="outputTotal != null">
+        output_total,
+      </if>
+      <if test="transactionFees != null">
+        transaction_fees,
+      </if>
+      <if test="merkleRoot != null">
+        merkle_root,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="blockHash != null">
+        #{blockHash,jdbcType=CHAR},
+      </if>
+      <if test="blockchainId != null">
+        #{blockchainId,jdbcType=INTEGER},
+      </if>
+      <if test="blockHeight != null">
+        #{blockHeight,jdbcType=INTEGER},
+      </if>
+      <if test="blockTime != null">
+        #{blockTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="txSize != null">
+        #{txSize,jdbcType=INTEGER},
+      </if>
+      <if test="sizeOnDisk != null">
+        #{sizeOnDisk,jdbcType=BIGINT},
+      </if>
+      <if test="difficulty != null">
+        #{difficulty,jdbcType=DOUBLE},
+      </if>
+      <if test="prevblockhash != null">
+        #{prevblockhash,jdbcType=CHAR},
+      </if>
+      <if test="nextblockhash != null">
+        #{nextblockhash,jdbcType=CHAR},
+      </if>
+      <if test="outputTotal != null">
+        #{outputTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="transactionFees != null">
+        #{transactionFees,jdbcType=DOUBLE},
+      </if>
+      <if test="merkleRoot != null">
+        #{merkleRoot,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.blockchain.po.block">
+    update block
+    <set>
+      <if test="blockchainId != null">
+        blockchain_id = #{blockchainId,jdbcType=INTEGER},
+      </if>
+      <if test="blockHeight != null">
+        block_height = #{blockHeight,jdbcType=INTEGER},
+      </if>
+      <if test="blockTime != null">
+        block_time = #{blockTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="txSize != null">
+        tx_size = #{txSize,jdbcType=INTEGER},
+      </if>
+      <if test="sizeOnDisk != null">
+        size_on_disk = #{sizeOnDisk,jdbcType=BIGINT},
+      </if>
+      <if test="difficulty != null">
+        difficulty = #{difficulty,jdbcType=DOUBLE},
+      </if>
+      <if test="prevblockhash != null">
+        prevBlockhash = #{prevblockhash,jdbcType=CHAR},
+      </if>
+      <if test="nextblockhash != null">
+        nextBlockhash = #{nextblockhash,jdbcType=CHAR},
+      </if>
+      <if test="outputTotal != null">
+        output_total = #{outputTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="transactionFees != null">
+        transaction_fees = #{transactionFees,jdbcType=DOUBLE},
+      </if>
+      <if test="merkleRoot != null">
+        merkle_root = #{merkleRoot,jdbcType=CHAR},
+      </if>
+    </set>
+    where block_hash = #{blockHash,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.blockchain.po.block">
+    update block
+    set blockchain_id = #{blockchainId,jdbcType=INTEGER},
+      block_height = #{blockHeight,jdbcType=INTEGER},
+      block_time = #{blockTime,jdbcType=TIMESTAMP},
+      tx_size = #{txSize,jdbcType=INTEGER},
+      size_on_disk = #{sizeOnDisk,jdbcType=BIGINT},
+      difficulty = #{difficulty,jdbcType=DOUBLE},
+      prevBlockhash = #{prevblockhash,jdbcType=CHAR},
+      nextBlockhash = #{nextblockhash,jdbcType=CHAR},
+      output_total = #{outputTotal,jdbcType=DOUBLE},
+      transaction_fees = #{transactionFees,jdbcType=DOUBLE},
+      merkle_root = #{merkleRoot,jdbcType=CHAR}
+    where block_hash = #{blockHash,jdbcType=CHAR}
+  </update>
+  <update id="truncate">
+    truncate table block;
+  </update>
+</mapper>
