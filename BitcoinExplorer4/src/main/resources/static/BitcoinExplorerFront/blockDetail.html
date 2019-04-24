@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="assets/css/elementui.css">
+</head>
+<body>
+    <div id="app">
+        <center>
+            <el-table :data="tabledata" stripe style="width: 950px;align-content: center;font-size: 18px">
+                <el-table-column  label="Height" width="180">
+                        <template slot-scope="scope">
+                                <a :href="'http://www.baidu.com/' + scope.row.height" style="color:black;font-size: 18px">{{scope.row.height}}</a>
+                        </template>
+                </el-table-column>
+                <el-table-column prop="blockHeight" label="Height" width="180">
+                </el-table-column>
+                <el-table-column prop="Time" label="blockTime">
+                </el-table-column>
+                <el-table-column prop="blockHash" label="Hash">
+                </el-table-column>
+                <el-table-column prop="sizeOnDisk" label="Size (kB)">
+                </el-table-column>
+            </el-table>
+           </center>
+      </div>
+
+
+
+   <script src="assets/js/axios.min.js"></script>
+   <script src="assets/js/vue.js"></script>
+   <script src="assets/js/elementui.js"></script> 
+   <script src="viewmodels/blockDetail.js"></script>
+  
+   
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Blockchain Explorer</title>
+    <link rel="stylesheet" href="assets/css/elementui.css">
+</head>
+<style>
+    .div1 {
+        margin: 0 auto;
+        width: 1000px;
+        height: 350px
+    }
+
+    .div2 {
+        margin: 0 auto;
+        width: 1000px;
+        height: 350px;
+        background-color: #ffffff
+    }
+
+    a {
+        margin-left: 30px;
+        color: white;
+        font-size: 30px
+    }
+
+    .a2 {
+        font-size: 20px
+    }
+</style>
+
+<body>
+    <div id="app">
+        <div style="background-color:#f0f2f7">
+            <p>
+                <div style="background:linear-gradient(to right,#00143f,#002f71);">
+                    <div class="div1">
+                        <a style="font-weight:bolder">BLOCKCHAIN</a>
+                        <a class="a2">Products</a>
+                        <a class="a2">Data</a>
+
+                        <div style="margin-top:65px">
+                            <center>
+                                <font style="font-weight:bolder;font-size:40px;color: white">Block Explorer</font>
+                            </center>
+                            <center>
+                                <p>
+                                    <el-input v-model="searchData" placeholder="请输入内容" style="width:550px;"></el-input>
+                                    <el-button>Search</el-button>
+                                </p>
+                                <br>
+                                <center>
+                                    <font style="font-size:20px;color: white">You can search for things
+                                        likeAddress,Transaction,orBlock</font>
+                                </center>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+            </p>
+            <P>
+                <div class="div2">
+                    <input type="image" src="assets/img/1.png">
+                </div>
+            </P>
+            <p>
+                <div class="div2" style="height: 540px;margin-top: 30px">
+                    <br>
+                    &nbsp; &nbsp; &nbsp;<el-button @click="getTableBlocks">BLOCKS</el-button>
+                    <el-button @click="getTableTransactions">TRANSACTIONS</el-button>
+                    <center>
+                    <el-table :data="showRecentBlocks" stripe style="width: 950px;align-content: center;font-size: 18px">
+                        <el-table-column  label="Height" width="180">
+                                <template slot-scope="scope">
+                                        <a :href="'blockDetail.html' + scope.row.height" style="color:black;font-size: 18px">{{scope.row.height}}</a>
+                                </template>
+                        </el-table-column>
+                        <el-table-column prop="showtime" label="Age" width="180">
+                        </el-table-column>
+                        <el-table-column prop="txSize" label="Transactions">
+                        </el-table-column>
+                        <el-table-column prop="miner" label="Miner">
+                        </el-table-column>
+                        <el-table-column prop="showsizeOnDisk" label="Size (bytes)">
+                        </el-table-column>
+                    </el-table>
+                    <br>
+                    <el-button @click="ViewMore">View More</el-button>
+                   </center>
+                </div>
+            </p>
+            <div style="width: 100%;height: 250px;background-color:#ffffff;">
+                <!-- <el-button type="primary" @click="handleConnect">连接</el-button>
+                <el-button type="primary" @click="handleSend">发送</el-button>
+                <el-button type="primary" @click="handleDisconnect">断开</el-button> -->
+            </div>
+            <div style="width: 100%;height: 250px;background-color:#f0f2f7;"></div>
+        </div>
+
+        <script src="assets/js/axios.min.js"></script>
+        <script src="assets/js/vue.js"></script>
+        <script src="assets/js/elementui.js"></script>
+        <script src="viewmodels/blockChainIndex.js"></script>
+        <script src="assets/js/common.js"></script>
+        <script src="assets/js/sockjs.min.js"></script>
+
+</body>
+
+</html>
